@@ -4,7 +4,13 @@ metadata:
   name: root
   namespace: argo
 spec:
-  generators: []
+  generators:
+  - list:
+      elements:
+      - app: nginx
+        app_ns: nginx-localchart
+      - app: apache
+        app_ns: apache-localchart
   template:
     metadata:
       name: nginx-local
@@ -13,7 +19,7 @@ spec:
       source:
         repoURL: https://github.com/zralt/k8s-argocd.git
         targetRevision: HEAD
-        path: apps/nginx
+        path: apps/{{ app }}
       destination:
         server: https://kubernetes.default.svc
-        namespace: nginx-localchart
+        namespace: {{ app_ns }}
