@@ -22,4 +22,4 @@ spec:
         path: apps/{{ app }}
       destination:
         server: https://kubernetes.default.svc
-        namespace: {{ app_ns }}
+        namespace: '{{ app_ns }}'
