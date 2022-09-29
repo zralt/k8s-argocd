@@ -7,13 +7,13 @@ spec:
   generators: []
   template:
     metadata:
-      name: 'nginx-local'
+      name: nginx-local
     spec:
       project: default
       source:
         repoURL: https://github.com/zralt/k8s-argocd.git
         targetRevision: HEAD
-        path: apps/
+        path: apps/nginx
       destination:
-        server: 'https://kubernetes.default.svc'
+        server: https://kubernetes.default.svc
         namespace: nginx-localchart
