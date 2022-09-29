@@ -5,27 +5,31 @@ metadata:
   namespace: argo
 spec:
   generators:
+  - clusters:
+      selector:
+        matchLabels:
+          dev: true
   - list:
       elements:
-      - app: nginx
-        app_ns: nginx-localchart
-      - app: apache
-        app_ns: apache-localchart
+      - appName: nginx
+        appNamespace: nginx-localchart
+      - appName: apache
+        appNamespace: apache-localchart
   template:
     metadata:
-      name: '{{ app }}-local'
+      name: '{{ appName }}'
     spec:
       project: default
       source:
         repoURL: https://github.com/zralt/k8s-argocd.git
         targetRevision: HEAD
-        path: 'apps/{{ app }}'
+        path: 'apps/{{ appName }}'
         helm:
           valueFiles:
             - values-prod.yaml
       destination:
-        server: https://kubernetes.default.svc
-        namespace: '{{ app_ns }}'
+        server: dev-cluster
+        namespace: '{{ appNamespace }}'
       syncPolicy:
         automated:
           selfHeal: true
