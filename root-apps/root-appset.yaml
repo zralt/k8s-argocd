@@ -8,7 +8,7 @@ spec:
   - clusters:
       selector:
         matchLabels:
-          dev: true
+          env: dev
   - list:
       elements:
       - appName: nginx
@@ -28,7 +28,7 @@ spec:
           valueFiles:
             - values-prod.yaml
       destination:
-        server: dev-cluster
+        server: '{{ name }}'
         namespace: '{{ appNamespace }}'
       syncPolicy:
         automated:
