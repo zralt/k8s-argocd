@@ -20,6 +20,9 @@ spec:
         repoURL: https://github.com/zralt/k8s-argocd.git
         targetRevision: HEAD
         path: 'apps/{{ app }}'
+        helm:
+          valueFiles:
+            - values-prod.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{ app_ns }}'
